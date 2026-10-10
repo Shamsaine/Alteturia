@@ -17,6 +17,7 @@
       toggleBtn.type = 'button';
       toggleBtn.setAttribute('aria-label', 'Toggle navigation');
       toggleBtn.setAttribute('data-nav-toggle', '1');
+      toggleBtn.setAttribute('aria-controls', 'main-navigation');
       toggleBtn.className =
         'hidden md:hidden px-3 py-2 rounded-lg border border-cyan-300/20 bg-white/5 text-neon font-bold';
       toggleBtn.style.display = 'none';
@@ -44,6 +45,7 @@
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
       updateToggleVisibility();
       
+      if (isMobile) setMobileCollapsed(true);
       if (!isMobile) {
         // On desktop, always show nav
         nav.classList.remove('nav-collapsed');
@@ -63,6 +65,10 @@
     toggleBtn.addEventListener('click', () => {
       const isCollapsed = nav.classList.contains('nav-collapsed');
       setMobileCollapsed(!isCollapsed);
+    });
+
+    nav.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && window.matchMedia('(max-width: 767px)').matches) { setMobileCollapsed(true); toggleBtn.focus(); }
     });
 
     // Handle window resize
