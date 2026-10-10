@@ -1,3 +1,4 @@
+const siteBase = new URL('../../', document.currentScript.src);
 // Specializations Data Structure
 const specializations = [
   {
@@ -82,16 +83,16 @@ const defaultConfig = {
   event_date: '9th May, 2026',
   event_time: '10:00 AM WAT',
   event_location: 'Virtual (Google Meet)',
-  contact_email: 'alteturiaofficial@gmail.com',
+  contact_email: 'support@alteturia.com',
   registration_sheet_webhook_url: 'https://script.google.com/macros/s/AKfycbyUoFXumBmKYrgKrWKG721jcLFKqjw2QLjkNQRrC80erbSjndGEN427C8sqZAAoEbjD/exec',
   contact_sheet_webhook_url: 'https://script.google.com/macros/s/AKfycbyUoFXumBmKYrgKrWKG721jcLFKqjw2QLjkNQRrC80erbSjndGEN427C8sqZAAoEbjD/exec',
   leaderboard_sheet_webhook_url: 'https://script.google.com/macros/s/AKfycbxmOVrxTzvqzJMwBhEmYlKLGpZ9GIUeDJgstRe9i6ikSZgJuIObtLXfkQcJgibrQVRzQA/exec',
   whatsapp_group_url: 'https://chat.whatsapp.com/LrzmQH68G150NgK3vV0HPy?mode=gi_t',
   logo_image_url: 'https://drive.google.com/file/d/1XSe6_1MyGamTZiMGA94nvjWiTXkWVXKb/view?usp=sharing',
   logo_fallback_local: 'logo-preview/logo.png',
-  background_color: '#030816',
-  accent_color: '#6ED8FF',
-  text_color: '#ffffff',
+  background_color: '#f7f5ed',
+  accent_color: '#145bec',
+  text_color: '#161814',
   card_color: '#0b1328',
   muted_text_color: '#9ca3af',
   font_family: 'Outfit',
@@ -253,36 +254,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Navigation Handler
 function initNavigation() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const navLinks = document.querySelectorAll('.nav-links a');
-  
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    const isChallengeRoute = window.location.pathname.includes('/pages/challenges/') && link.dataset.route === 'challenges';
-    if (href === currentPage || (currentPage === '' && href === 'index.html') || isChallengeRoute) {
-      link.classList.add('active');
-    }
+  const path = window.location.pathname;
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    const target = new URL(link.href).pathname;
+    const active = path === target || (link.dataset.route === 'about' && path.endsWith('/pages/about.html'));
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
 }
 
 function initRouteLinks() {
-  const path = window.location.pathname;
-  const isChallengePage = path.includes('/pages/challenges/');
-  const isInsidePagesFolder = path.includes('/pages/') && !isChallengePage;
-  const routes = {
-    home: isChallengePage ? '../../index.html' : (isInsidePagesFolder ? '../index.html' : 'index.html'),
-    about: isChallengePage ? '../about.html' : (isInsidePagesFolder ? 'about.html' : 'pages/about.html'),
-    events: isChallengePage ? '../events.html' : (isInsidePagesFolder ? 'events.html' : 'pages/events.html'),
-    futureBuilder: isChallengePage ? '../future-builder-series.html' : (isInsidePagesFolder ? 'future-builder-series.html' : 'pages/future-builder-series.html'),
-    challenges: isChallengePage ? 'index.html' : (isInsidePagesFolder ? 'challenges/index.html' : 'pages/challenges/index.html'),
-    registerTechnicalSession: 'https://chat.whatsapp.com/LrzmQH68G150NgK3vV0HPy?mode=gi_t'
-  };
-
+  const routes = { home: '', about: 'about/', studios: 'studios/', hub: 'hub/', media: 'media/', projects: 'projects/', resources: 'resources/', contact: 'contact/', events: 'pages/events.html', futureBuilder: 'pages/future-builder-series.html', challenges: 'pages/challenges/index.html', launchPad: 'pages/challenges/launch-pad.html#register', registerTechnicalSession: defaultConfig.whatsapp_group_url };
   document.querySelectorAll('[data-route]').forEach(link => {
-    const routeName = link.dataset.route;
-    if (routeName && routes[routeName]) {
-      link.setAttribute('href', routes[routeName]);
-    }
+    if (Object.hasOwn(routes, link.dataset.route)) link.href = new URL(routes[link.dataset.route], siteBase).href;
   });
 }
 
@@ -306,7 +290,7 @@ function initLaunchPadRegistration() {
     document.querySelectorAll('[data-track-required]').forEach(field => {
       field.required = field.closest('[hidden]') === null;
     });
-    if (heading) heading.textContent = isBuilder ? 'Builder Sprint registration' : 'Learning Sprint registration';
+    if (heading) heading.textContent = isBuilder ? 'Builder Track registration' : 'Learning Track registration';
   };
   track?.addEventListener('change', syncTrack);
   const syncPlatform = () => {
@@ -393,14 +377,15 @@ async function loadComponents() {
     const isChallengePage = path.includes('/pages/challenges/');
     const isInsidePagesFolder = path.includes('/pages/') && !isChallengePage;
     const componentPrefix = isChallengePage ? '../../' : (isInsidePagesFolder ? '../' : '');
-    const navbarPath = `${componentPrefix}components/navbar.html`;
-    const footerPath = `${componentPrefix}components/footer.html`;
+    const navbarPath = new URL('components/navbar.html', siteBase);
+    const footerPath = new URL('components/footer.html', siteBase);
 
     const navbarContainer = document.getElementById('navbar-container');
     const footerContainer = document.getElementById('footer-container');
 
     if (navbarContainer) {
       const navbarRes = await fetch(navbarPath);
+      if (!navbarRes.ok) throw new Error('Navigation unavailable');
       navbarContainer.innerHTML = await navbarRes.text();
       initRouteLinks();
       initNavigation();
@@ -408,7 +393,11 @@ async function loadComponents() {
 
     if (footerContainer) {
       const footerRes = await fetch(footerPath);
+      if (!footerRes.ok) throw new Error('Footer unavailable');
       footerContainer.innerHTML = await footerRes.text();
+      initRouteLinks();
+      initFormHandlers();
+      initLucide();
     }
   } catch (error) {
     console.error('Error loading components:', error);
@@ -515,7 +504,7 @@ async function handleRegistrationSubmit(event) {
     });
 
     this.reset();
-    setFormStatus(statusText, '✓ Registration successful! Your details have been saved.\nRedirecting to our WhatsApp community...', true);
+    setFormStatus(statusText, '✓ Registration request sent. Confirmation is pending.\nRedirecting to our WhatsApp community...', true);
 
     // Only redirect if whatsappGroup is explicitly provided by the form/page.
     // Prevent accidental redirects when whatsappGroup is missing/undefined.
@@ -592,6 +581,7 @@ async function handleContactSubmit(event) {
 
 // Scroll Animations
 function initScrollAnimations() {
+  if (document.body.classList.contains('brand-page') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
