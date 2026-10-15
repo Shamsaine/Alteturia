@@ -145,3 +145,55 @@
   }
 }
 .selected-projects{display:grid;gap:28px}.project-group-content .project-entry + .project-entry{margin-top:44px;padding-top:36px;border-top:1px solid #c7cabe}.brand-card a[href^="mailto:"]{overflow-wrap:anywhere;max-width:100%}
+
+/* Supplied Games artwork stays intact at every screen size. */
+.project-image {
+  min-width: 0;
+  background: #fff8ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.project-feature--games,
+.project-feature--edible {
+  align-items: start;
+}
+.project-facts {
+  display: grid;
+  gap: 16px;
+  margin: 28px 0;
+}
+.project-facts dt {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.project-facts dd {
+  margin: 0;
+  color: #4c5148;
+  line-height: 1.5;
+}
+
+/* Keep the transparent Edible Shop artwork legible and uncropped. */
+.project-image--edible {
+  padding: clamp(24px, 4vw, 48px);
+  min-height: 300px;
+}
+
+/* Keep Graqivo's small source images crisp at their native size. */
+.project-feature--graqivo { align-items: start; }
+.project-image--graqivo { min-height: 300px; padding: 24px; }
+.project-image--graqivo img { width: auto; max-width: 100%; height: auto; }
+
+.brand-button:disabled, .brand-button:disabled:hover {
+  background: #e5e7de;
+  border-color: #b8bdaf;
+  color: #555a50;
+  cursor: not-allowed;
+}
+.project-copy .project-availability { margin-top: 16px; font-size: 14px; }
