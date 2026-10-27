@@ -1,0 +1,30 @@
+/* Studios hero artwork and readable text overlay. */
+.brand-page .studios-hero {
+  display: flex;
+  align-items: center;
+  max-width: none;
+  min-height: 620px;
+  margin-block: 28px;
+  padding: clamp(32px, 4vw, 58px);
+  background-color: #f5efe2;
+  background-image: linear-gradient(90deg, rgba(247,245,237,.97) 0%, rgba(247,245,237,.94) 30%, rgba(247,245,237,.78) 48%, rgba(247,245,237,.08) 76%, transparent 100%), url('../images/studios/product-studio-at-work.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.studios-hero-copy { width: 52%; max-width: 590px; min-width: 0; text-align: left; }
+.studios-hero h1 { font-size: clamp(34px, 3.8vw, 50px); line-height: 1.12; letter-spacing: -.04em; }
+.studios-hero .hero-description { font-size: 18px; color: #34392f; }
+.studios-hero .brand-actions { justify-content: flex-start; }
+@media (max-width: 920px) {
+  .brand-page .studios-hero {
+    min-height: 560px;
+    padding: 42px 22px;
+    margin-block: 18px;
+    background-image: linear-gradient(rgba(247,245,237,.88), rgba(247,245,237,.9)), url('../images/studios/product-studio-at-work.png');
+    background-position: 65% center;
+  }
+  .studios-hero-copy { width: 100%; margin-inline: auto; text-align: center; }
+  .studios-hero h1 { font-size: clamp(32px, 6.5vw, 48px); }
+  .studios-hero .brand-actions { justify-content: center; }
+}

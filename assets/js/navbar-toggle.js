@@ -41,10 +41,15 @@
       toggleBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
     }
 
+    let previousMobileState = window.matchMedia('(max-width: 767px)').matches;
+
     function handleResize() {
       const isMobile = window.matchMedia('(max-width: 767px)').matches;
       updateToggleVisibility();
       
+      // Height-only changes (such as the mobile browser toolbar) must not close the menu.
+      if (isMobile === previousMobileState) return;
+      previousMobileState = isMobile;
       if (isMobile) setMobileCollapsed(true);
       if (!isMobile) {
         // On desktop, always show nav

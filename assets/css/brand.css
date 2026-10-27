@@ -145,3 +145,119 @@
   }
 }
 .selected-projects{display:grid;gap:28px}.project-group-content .project-entry + .project-entry{margin-top:44px;padding-top:36px;border-top:1px solid #c7cabe}.brand-card a[href^="mailto:"]{overflow-wrap:anywhere;max-width:100%}
+
+/* Supplied Games artwork stays intact at every screen size. */
+.project-image {
+  min-width: 0;
+  background: #fff8ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.project-feature--games,
+.project-feature--edible {
+  align-items: start;
+}
+.project-facts {
+  display: grid;
+  gap: 16px;
+  margin: 28px 0;
+}
+.project-facts dt {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.project-facts dd {
+  margin: 0;
+  color: #4c5148;
+  line-height: 1.5;
+}
+
+/* Keep the transparent Edible Shop artwork legible and uncropped. */
+.project-image--edible {
+  padding: clamp(24px, 4vw, 48px);
+  min-height: 300px;
+}
+
+/* Keep Graqivo's small source images crisp at their native size. */
+.project-feature--graqivo { align-items: start; }
+.project-image--graqivo { min-height: 300px; padding: 24px; }
+.project-image--graqivo img { width: auto; max-width: 100%; height: auto; }
+
+.brand-button:disabled, .brand-button:disabled:hover {
+  background: #e5e7de;
+  border-color: #b8bdaf;
+  color: #555a50;
+  cursor: not-allowed;
+}
+.project-copy .project-availability { margin-top: 16px; font-size: 14px; }
+
+.event-section-links { margin-top: 0; margin-bottom: 30px; }
+.event-group-title { font-size: clamp(23px, 3vw, 30px); margin: 48px 0 24px; }
+.event-date { font: 700 12px/1.6 'Space Mono', monospace; color: #145bec; }
+#upcoming-events, #past-events, #upcoming-launch-pad { scroll-margin-top: 110px; }
+
+/* Plain social icons and a separate final copyright strip. */
+.brand-footer .footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+.footer-socials > span {
+  font: 700 10px 'Space Mono', monospace;
+  color: #c7cabe;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+.brand-footer .footer-social-icon {
+  display: inline-flex;
+  flex: 0 0 32px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #f7f5ed;
+  text-decoration: none;
+}
+.brand-footer .footer-social-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.brand-footer .footer-social-icon:hover { color: var(--brand-lime); }
+.footer-social-icon:focus-visible { outline: 2px solid var(--brand-lime); outline-offset: 3px; }
+.brand-footer .footer-signoff { margin: 24px 0 0; font-size: 13px; color: #c7cabe; }
+.footer-copyright-bar {
+  display: block;
+  width: 100%;
+  padding: 22px;
+  border-top: 1px solid #68705f;
+  background: #161814;
+  color: #f7f5ed;
+  text-align: center;
+}
+.footer-copyright-bar p {
+  display: block;
+  margin: 0;
+  color: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+}
+@media (max-width: 420px) {
+  .footer-socials > span { flex-basis: 100%; margin-right: 0; }
+}
