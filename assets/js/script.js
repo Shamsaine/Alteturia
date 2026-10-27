@@ -392,7 +392,7 @@ async function loadComponents() {
     }
 
     if (footerContainer) {
-      const footerRes = await fetch(footerPath);
+      const footerRes = await fetch(footerPath, { cache: 'no-cache' });
       if (!footerRes.ok) throw new Error('Footer unavailable');
       footerContainer.innerHTML = await footerRes.text();
       initRouteLinks();

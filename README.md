@@ -42,3 +42,5 @@ Project descriptions cover Alteturia Games (vintage group games) and The Edible 
 Relative file links, duplicate IDs, JavaScript parsing, nested route resolution, Launch Pad track transitions, enquiry draft behavior and 17 local HTTP routes/assets were checked. Live webhook submissions and email sends were not performed. Visual browser QA remains outstanding because no browser was available in the session.
 
 Enquiries route by type: Projects to studios@alteturia.com; learning and participation to hub@alteturia.com; media and creative work to media@alteturia.com; recruitment to recruitment@alteturia.com; privacy to privacy@alteturia.com; general and partnership enquiries to support@alteturia.com.
+
+The Events listing remains at `pages/events.html`. It separates coming-soon programmes from the past-event archive. Detail pages in `pages/events/` cover the May webinar, the six June career-discovery sessions and the previous Launch Pad edition. The full June host/speaker information is preserved in `pages/events/career-discovery.html`; the original Launch Pad page retains its form, rules and leaderboard.
