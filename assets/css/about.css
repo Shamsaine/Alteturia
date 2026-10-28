@@ -1,0 +1,29 @@
+/* About shares the existing brand layout, with focused story and process sections. */
+.about-page .brand-hero { max-width: 1000px; }
+.about-page .hero-description { max-width: 750px; }
+.about-page .brand-section h2, .about-page h1 { text-wrap: balance; }
+
+.about-page .brand-section > p { margin-bottom: 30px; }
+.about-page .brand-card .eyebrow { margin-bottom: 0; }
+.about-page .brand-card p { margin-bottom: 26px; }
+.about-collaboration { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; list-style: none; padding: 0; margin: 36px 0 0; }
+.about-collaboration li { min-width: 0; padding: 24px 12px; border-top: 2px solid #161814; }
+.about-collaboration li > span { font: 700 12px 'Space Mono', monospace; color: #145bec; }
+.about-collaboration h3 { font-size: 23px; line-height: 1.3; margin: 18px 0 14px; }
+.about-collaboration p { font-size: 16px; line-height: 1.75; color: #555a50; }
+.about-closing { padding-block: 80px; }
+@media (max-width: 767px) {
+      .about-closing { padding-block: 48px; }
+}
+
+.about-purpose-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.about-purpose-card { min-width: 0; padding: 34px; border: 1px solid #c7cabe; background: #fffef9; }
+.about-purpose-card:first-child { background: #eff2e4; }
+.about-page .about-purpose-card h2 { font-size: clamp(26px, 3vw, 36px); }
+.about-purpose-card p { color: #555a50; line-height: 1.8; font-size: 17px; }
+.about-page .org-branches { position: relative; }
+.about-page .org-branches::before { content: ''; position: absolute; top: -29px; left: 50%; height: 28px; border-left: 1px solid #161814; }
+@media (max-width: 767px) {
+  .about-purpose-grid { grid-template-columns: 1fr; gap: 24px; }
+  .about-purpose-card { padding: 24px; }
+}
