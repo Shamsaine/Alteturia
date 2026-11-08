@@ -13,14 +13,49 @@
 .home-page .brand-section { padding-block: clamp(48px, 6vw, 78px); }
 .home-page .brand-section h2 { text-wrap: balance; }
 .home-page .selected-projects {
-  grid-template-columns: 1fr;
+  display: flex;
   gap: 22px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  padding-bottom: 8px;
+  overscroll-behavior-x: contain;
 }
 .home-page .home-project-card {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
 }
+.home-project-carousel { min-width: 0; }
+.home-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+.home-carousel-position {
+  margin-right: auto;
+  color: #555a50;
+  font: 700 12px/1.5 'Space Mono', monospace;
+}
+.home-carousel-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #c7cabe;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--brand-ink);
+  font-size: 20px;
+  cursor: pointer;
+}
+.home-carousel-button:hover { background: #eff2e4; }
+.home-carousel-button:focus-visible { outline: 3px solid var(--brand-blue); outline-offset: 3px; }
 .home-project-image {
   background: #fff8ec;
   height: 230px;
@@ -106,7 +141,6 @@
   .home-page .brand-actions { flex-direction: column; align-items: stretch; }
 }
 
-/* One featured project fills the trending section on wider screens. */
 @media (min-width: 1051px) {
   .home-page .home-project-card {
     display: grid;

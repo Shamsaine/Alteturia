@@ -196,8 +196,6 @@
   color: #555a50;
   cursor: not-allowed;
 }
-.project-copy .project-availability { margin-top: 16px; font-size: 14px; }
-
 .event-section-links { margin-top: 0; margin-bottom: 30px; }
 .event-group-title { font-size: clamp(23px, 3vw, 30px); margin: 48px 0 24px; }
 .event-date { font: 700 12px/1.6 'Space Mono', monospace; color: #145bec; }
@@ -261,3 +259,16 @@
 @media (max-width: 420px) {
   .footer-socials > span { flex-basis: 100%; margin-right: 0; }
 }
+
+/* Keep short branded pages full-height, with their footer at the viewport edge. */
+body.brand-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+body.brand-page > main {
+  flex: 1 0 auto;
+  margin-block: 0;
+}
+body.brand-page > .launch-pad-page { min-height: 0; }
